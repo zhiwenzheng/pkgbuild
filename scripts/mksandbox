@@ -51,7 +51,7 @@ fi
 #
 # Create system loopback mounts.
 #
-for dir in /dev /lib /sbin /usr; do
+for dir in /lib /sbin /usr; do
 	mkdir -p ${chrootdir}${dir}
 	mount -F lofs -r ${dir} ${chrootdir}${dir}
 done
@@ -59,7 +59,10 @@ done
 #
 # Create system special mounts.
 #
+mkdir -p ${chrootdir}/dev/fd
 mount -F fd fd ${chrootdir}/dev/fd
+
+mknod ${chrootdir}/dev/null c 38 2
 
 mkdir -p ${chrootdir}/proc
 mount -F proc /proc ${chrootdir}/proc
