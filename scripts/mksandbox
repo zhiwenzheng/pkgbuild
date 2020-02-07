@@ -62,7 +62,19 @@ done
 mkdir -p ${chrootdir}/dev/fd
 mount -F fd fd ${chrootdir}/dev/fd
 
-mknod ${chrootdir}/dev/null c 38 2
+mknod ${chrootdir}/dev/null c 0x26 0x2
+mknod ${chrootdir}/dev/zero c 0x26 0xc
+mknod ${chrootdir}/dev/tty c 0x3b 0x0
+mknod ${chrootdir}/dev/log c 0x25 0x5
+
+mknod ${chrootdir}/dev/random c 0x31 0x0
+mknod ${chrootdir}/dev/urandom c 0x31 0x1
+
+mknod ${chrootdir}/dev/arp c 0x8 0x0
+mknod ${chrootdir}/dev/udp c 0x41 0x0
+mknod ${chrootdir}/dev/udp6 c 0x43 0x0
+mknod ${chrootdir}/dev/tcp c 0x3e 0x0
+mknod ${chrootdir}/dev/tcp6 c 0x3f 0x0
 
 mkdir -p ${chrootdir}/proc
 mount -F proc /proc ${chrootdir}/proc
