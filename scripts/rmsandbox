@@ -74,7 +74,7 @@ if [ -d "${chrootdir}" ]; then
 	#
 	# System directories.
 	#
-	for dir in /dev /lib /sbin /usr /proc /system/lxproc; do
+	for dir in /lib /sbin /usr /proc /system/lxproc; do
 		unmount_and_rm ${chrootdir}${dir}
 	done
 
@@ -114,7 +114,7 @@ if [ -d "${chrootdir}" ]; then
 	# This must be done carefully to avoid deleting anything in writeable
 	# mounts which may have failed to unmount.
 	#
-	rm -rf ${chrootdir}/{bin,etc,home,opt,root,system,var}
+	rm -rf ${chrootdir}/{bin,etc,home,opt,root,system,var,dev}
 
 	#
 	# pkgsrc leftovers.

@@ -75,6 +75,11 @@ ed ${chrootdir}${PKGBUILD_SYSCONFDIR}/pkg_install.conf >/dev/null 2>&1 <<-EOF
 	w
 	q
 EOF
+ed ${chrootdir}${PKGBUILD_SYSCONFDIR}/pkg_install.conf >/dev/null 2>&1 <<-EOF
+	g/^PKG_PATH=/d
+	w
+	q
+EOF
 if [ -n "${CMD_GPG}" -a -n "${PKGBUILD_GPG_SIGN_AS}" ]; then
 	ed ${chrootdir}${PKGBUILD_SYSCONFDIR}/pkg_install.conf >/dev/null 2>&1 <<-EOF
 		g/^GPG=/d
@@ -125,8 +130,8 @@ EOF
 echo "done."
 echo -n "Installing additional tools packages..."
 /usr/sbin/chroot ${chrootdir} /bin/bash -c "
-	${TOOLS_BASEDIR}/sbin/pkg_add git-base grep mozilla-rootcerts pkgdiff pkglint >/dev/null 2>&1
-	${TOOLS_BASEDIR}/sbin/mozilla-rootcerts install >/dev/null 2>&1 || true
+	${PKGBUILD_LOCALBASE}/sbin/pkg_add ${TOOLS_COMPILER} pbulk git-base grep mozilla-rootcerts pkgdiff pkglint >/dev/null 2>&1
+	${PKGBUILD_LOCALBASE}/sbin/mozilla-rootcerts install >/dev/null 2>&1 || true
 "
 echo "done."
 echo "Logging in.  WARNING: On logout the sandbox will be destroyed."
