@@ -130,8 +130,8 @@ EOF
 echo "done."
 echo -n "Installing additional tools packages..."
 /usr/sbin/chroot ${chrootdir} /bin/bash -c "
-	${PKGBUILD_LOCALBASE}/sbin/pkg_add ${TOOLS_COMPILER} pbulk git-base grep mozilla-rootcerts pkgdiff pkglint >/dev/null 2>&1
-	${PKGBUILD_LOCALBASE}/sbin/mozilla-rootcerts install >/dev/null 2>&1 || true
+	${TOOLS_BASEDIR}/sbin/pkg_add git-base grep mozilla-rootcerts pkgdiff pkglint >/dev/null 2>&1
+	${TOOLS_BASEDIR}/sbin/mozilla-rootcerts install >/dev/null 2>&1 || true
 "
 echo "done."
 echo "Logging in.  WARNING: On logout the sandbox will be destroyed."
